@@ -4,32 +4,19 @@ import 'package:admin_dashboard/models/producto.dart';
 import 'package:flutter/material.dart';
 
 class ProductsProvider extends ChangeNotifier {
-  // static var client = http.Client();
-  // Future<List<Producto>> getMaleProducts() async {
-  //   var url = Uri.http("localhost:3000", '/productos');
-  //   var response = await client.get(url);
+  Future<List<Producto>> getMaleProducts() async {
+    final resp = await CafeApi.httpGet('/productos');
+    final productResp = ProductResponse.fromJson(resp);
 
-  //   if (response.statusCode == 200) {
-  //     var maleList = sneakersFromJson(response.body);
-  //     var male =
-  //         maleList.where((element) => element.category == "Men's Running");
-  //     return male.toList();
-  //   } else {
-  //     throw Exception('Failed to load jobs list');
-  //   }
-
-  //   final resp = await CafeApi.httpGet('/productos');
-  //   final productResp = ProductResponse.fromJson(resp);
-
-  //   if (resp.statusCode == 200) {
-  //     var productos = [...productResp.productos];
-  //     //var productos = productoFromJson(productResp.);
-  //     var male = productos.where((element) => element.category == "Men's Running");
-  //     return male.toList();
-  //   } else {
-  //     throw Exception('Failed to load jobs list');
-  //   }
-  // }
+    if (resp.statusCode == 200) {
+      var productos = [...productResp.productos];
+      //var productos = productoFromJson(productResp.);
+      var male = productos.where((element) => element.category == "Men's Running");
+      return male.toList();
+    } else {
+      throw Exception('Failed to load jobs list');
+    }
+  }
 }
 
 
