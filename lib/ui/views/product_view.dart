@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -9,18 +10,17 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import 'package:admin_dashboard/models/producto.dart';
-import 'package:admin_dashboard/providers/product_provider.dart';
-import 'package:admin_dashboard/services/helper.dart';
+import 'package:admin_dashboard/providers/product_notifier.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
 import 'package:admin_dashboard/ui/buttons/checkout_btn.dart';
 import 'package:admin_dashboard/providers/favorites_provider.dart';
 //import 'package:tienda_online/views/ui/favorites_page.dart';
 
 class ProductView extends StatefulWidget {
-  const ProductView({super.key, required this.id, required this.category});
+  const ProductView({super.key, required this.id, required this.para});
 
   final String id;
-  final String category;
+  final String para;
 
   @override
   State<ProductView> createState() => _ProductViewState();
@@ -30,17 +30,25 @@ class _ProductViewState extends State<ProductView> {
   final PageController pageController = PageController();
 
   final _cartBox = Hive.box('cart_box');
-  final _favBox = Hive.box('fav_box');
+  //final _favBox = Hive.box('fav_box');
 
   late Future<Producto?> _producto;
+  List<String> tallas_lista = ['7.0', '8.0'];
 
   void getShoes() {
-    if (widget.category == "Men's_Running") {
-      _producto = Helper().getMaleSneakersById(widget.id);
-    } else if (widget.category == "Women's Running") {
-      _producto = Helper().getFemaleSneakersById(widget.id);
+    if (widget.para == 'hombre') {
+      //_producto = Helper().getMaleSneakersById(widget.id);
+
+      //print('${widget.id} and ${widget.para}  hombre');
+      _producto = ProductsProvider().getMaleProductById(widget.id);
+    } else if (widget.para == 'mujer') {
+      //print('${widget.id} and ${widget.para} mujer');
+      //_producto = Helper().getFemaleSneakersById(widget.id);
+      _producto = ProductsProvider().getfeMaleProductById(widget.id);
     } else {
-      _producto = Helper().getKidsSneakersById(widget.id);
+      //print('${widget.id} and ${widget.para}  nino');
+
+      _producto = ProductsProvider().getKidsProductById(widget.id);
     }
   }
 
@@ -48,13 +56,12 @@ class _ProductViewState extends State<ProductView> {
     await _cartBox.add(newCart);
   }
 
-  Future<void> _createFav(Map<String, dynamic> addFav) async {
-    await _favBox.add(addFav);
-  }
+  // Future<void> _createFav(Map<String, dynamic> addFav) async {
+  //   await _favBox.add(addFav);
+  // }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getShoes();
   }
@@ -76,7 +83,7 @@ class _ProductViewState extends State<ProductView> {
             return Consumer<ProductNotifier>(
               builder: (context, productNotifier, child) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: CustomScrollView(
                     scrollDirection: Axis.vertical,
                     slivers: <Widget>[
@@ -84,7 +91,7 @@ class _ProductViewState extends State<ProductView> {
                         automaticallyImplyLeading: false,
                         leadingWidth: 0,
                         title: Padding(
-                          padding: EdgeInsets.only(bottom: 10),
+                          padding: const EdgeInsets.only(bottom: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -120,7 +127,7 @@ class _ProductViewState extends State<ProductView> {
                                 width: MediaQuery.of(context).size.width,
                                 child: PageView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: producto!.imageUrl.length,
+                                  itemCount: producto!.img.length,
                                   controller: pageController,
                                   onPageChanged: (page) {
                                     productNotifier.activePage = page;
@@ -134,7 +141,7 @@ class _ProductViewState extends State<ProductView> {
                                           color: Colors.grey.shade300,
                                           child: Center(
                                             child: CachedNetworkImage(
-                                              imageUrl: producto.imageUrl[index],
+                                              imageUrl: producto.img[index],
                                               fit: BoxFit.contain,
                                             ),
                                           ),
@@ -146,7 +153,7 @@ class _ProductViewState extends State<ProductView> {
                                               builder: (context, favoritesNotifier, child) {
                                             return GestureDetector(
                                               onTap: () {
-                                                print('fav');
+                                                // print('fav');
                                               },
                                               child: favoritesNotifier.ids.contains(producto.id)
                                                   ? const Icon(
@@ -170,7 +177,7 @@ class _ProductViewState extends State<ProductView> {
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: List<Widget>.generate(
-                                              producto.imageUrl.length,
+                                              producto.img.length,
                                               (index) => Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 4),
                                                 child: CircleAvatar(
@@ -215,13 +222,13 @@ class _ProductViewState extends State<ProductView> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            producto.name,
+                                            producto.nombre,
                                             style: appstyle(40, Colors.black, FontWeight.bold),
                                           ),
                                           Row(
                                             children: [
                                               Text(
-                                                producto.category,
+                                                producto.categoria,
                                                 style: appstyle(20, Colors.grey, FontWeight.w500),
                                               ),
                                               const SizedBox(width: 20),
@@ -247,7 +254,7 @@ class _ProductViewState extends State<ProductView> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "\$${producto.price}",
+                                                "\$${producto.precio}",
                                                 style: appstyle(26, Colors.black, FontWeight.w600),
                                               ),
                                               Row(
@@ -271,6 +278,8 @@ class _ProductViewState extends State<ProductView> {
                                               ),
                                             ],
                                           ),
+
+                                          ///TODO
                                           const SizedBox(height: 10),
                                           Column(
                                             children: [
@@ -289,20 +298,27 @@ class _ProductViewState extends State<ProductView> {
                                                   ),
                                                 ],
                                               ),
+
+                                              //tododddddddddddddddddddd
+
+                                              //////////////////////
+
                                               const SizedBox(height: 10),
                                               SizedBox(
-                                                height: 40,
+                                                height: 60,
                                                 //width: MediaQuery.of(context).size.width * 0.5,
                                                 child: ListView.builder(
                                                   itemCount: productNotifier.shoeSizes.length,
                                                   scrollDirection: Axis.horizontal,
                                                   padding: EdgeInsets.zero,
                                                   itemBuilder: (context, index) {
-                                                    final sizes = productNotifier.shoeSizes[index];
-                                                    print(sizes);
+                                                    final tallas = productNotifier.shoeSizes[index];
+                                                    print(productNotifier.shoeSizes.length);
+                                                    print('++++++++++++++++++++++++++');
+                                                    //print(tallas.toString());
                                                     return Padding(
-                                                      padding:
-                                                          const EdgeInsets.symmetric(horizontal: 2),
+                                                      padding: const EdgeInsets.symmetric(
+                                                          horizontal: 2.0),
                                                       child: ChoiceChip(
                                                         shape: RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.circular(60),
@@ -313,30 +329,33 @@ class _ProductViewState extends State<ProductView> {
                                                         ),
                                                         disabledColor: Colors.white,
                                                         label: Text(
-                                                          'holaaaaaaaaaaaaaa',
-                                                          //sizes['size'],
+                                                          tallas['size'].toString(),
                                                           style: appstyle(
                                                               14,
-                                                              sizes['isSelected']
-                                                                  ? Colors.white
-                                                                  : Colors.black,
+                                                              // tallas['isSelected']
+                                                              //     ? Colors.white
+                                                              //     :
+                                                              Colors.black,
                                                               FontWeight.w500),
                                                         ),
+
                                                         selectedColor: Colors.black,
                                                         padding:
                                                             const EdgeInsets.symmetric(vertical: 8),
-                                                        selected: sizes['isSelected'],
-                                                        onSelected: (newState) {
-                                                          if (productNotifier.sizes
-                                                              .contains(sizes['size'])) {
-                                                            productNotifier.sizes
-                                                                .remove(sizes['size']);
-                                                          } else {
-                                                            productNotifier.sizes
-                                                                .add(sizes['size']);
-                                                          }
-                                                          productNotifier.toggleCheck(index);
-                                                        },
+                                                        selected: false, // tallas['isSelected'],
+                                                        // onSelected: (newState) {
+                                                        //   if (productNotifier.sizes
+                                                        //       .contains(tallas['talla'])) {
+                                                        //     print('hola ${tallas['talla']}');
+                                                        //     productNotifier.sizes
+                                                        //         .remove(tallas['talla']);
+                                                        //   } else {
+                                                        //     print('hola else ${tallas['talla']}');
+                                                        //     productNotifier.sizes
+                                                        //         .add(tallas['talla']);
+                                                        //   }
+                                                        //   productNotifier.toggleCheck(index);
+                                                        // },
                                                       ),
                                                     );
                                                   },
@@ -354,7 +373,7 @@ class _ProductViewState extends State<ProductView> {
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width * 0.8,
                                             child: Text(
-                                              producto.title,
+                                              producto.nombre,
                                               maxLines: 2,
                                               style: appstyle(15, Colors.black, FontWeight.w700),
                                             ),
@@ -363,25 +382,25 @@ class _ProductViewState extends State<ProductView> {
                                           Text(
                                             //todo
                                             //cambiar a descripcion
-                                            producto.description,
+                                            producto.descripcion,
                                             textAlign: TextAlign.justify,
                                             maxLines: 4,
                                             style: appstyle(12, Colors.black, FontWeight.normal),
                                           ),
                                           const SizedBox(height: 5),
                                           Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 70),
+                                            padding: const EdgeInsets.symmetric(horizontal: 70),
                                             child: Padding(
                                               padding: const EdgeInsets.only(top: 12),
                                               child: CheckOutBtn(
                                                   onTap: () async {
                                                     _createCart({
                                                       "id": producto.id,
-                                                      "name": producto.name,
-                                                      "category": producto.category,
+                                                      "name": producto.nombre,
+                                                      "category": producto.categoria,
                                                       "sizes": productNotifier.sizes,
-                                                      "imageUrl": producto.imageUrl[0],
-                                                      "price": producto.price,
+                                                      "imageUrl": producto.img[0],
+                                                      "price": producto.precio,
                                                       "qty": 1
                                                     });
                                                     productNotifier.sizes.clear();

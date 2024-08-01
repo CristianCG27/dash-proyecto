@@ -13,13 +13,15 @@ class ProductCard extends StatefulWidget {
       required this.category,
       required this.id,
       required this.name,
-      required this.image});
+      required this.image,
+      required this.para});
 
   final String price;
   final String category;
   final String id;
   final String name;
   final String image;
+  final String para;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -63,7 +65,7 @@ class _ProductCardState extends State<ProductCard> {
               Stack(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
+                    height: MediaQuery.of(context).size.height * 0.22,
                     decoration: BoxDecoration(
                       image: DecorationImage(image: NetworkImage(widget.image)),
                     ),
@@ -93,45 +95,87 @@ class _ProductCardState extends State<ProductCard> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       widget.name,
-                      style: appstyleWithHt(28, Colors.black, FontWeight.bold, 1.1),
+                      style: appstyleWithHt(18, Colors.black, FontWeight.bold, 1.1),
+                      textAlign: TextAlign.center,
                     ),
+                    const SizedBox(height: 10),
                     Text(
-                      widget.category,
-                      style: appstyleWithHt(18, Colors.grey, FontWeight.bold, 1.5),
+                      widget.para,
+                      style: appstyleWithHt(15, Colors.grey, FontWeight.bold, 1.5),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
               ),
+              //const SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
                   children: [
-                    Text(
-                      widget.price,
-                      style: appstyle(25, Colors.black, FontWeight.w600),
-                    ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Colores",
+                          widget.price,
+                          style: appstyle(30, Colors.black, FontWeight.w600),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Colors",
                           style: appstyle(18, Colors.grey, FontWeight.w500),
                         ),
                         const SizedBox(
                           width: 5,
                         ),
-                        ChoiceChip(
-                          label: const Text(""),
-                          selected: selected,
-                          visualDensity: VisualDensity.compact,
-                          selectedColor: Colors.black,
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(500)),
+                          child: Container(
+                            color: Colors.black,
+                            child: const Text(
+                              ".....",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 3),
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(500)),
+                          child: Container(
+                            color: Colors.yellow,
+                            child: const Text(
+                              ".....",
+                              style: TextStyle(color: Colors.yellow),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 3),
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(500)),
+                          child: Container(
+                            color: Colors.red,
+                            child: const Text(
+                              ".....",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
                         )
+                        // ChoiceChip(
+                        //   label: const Text(""),
+                        //   selected: selected,
+                        //   visualDensity: VisualDensity.compact,
+                        //   selectedColor: Colors.black,
+                        // )
                       ],
                     )
                   ],

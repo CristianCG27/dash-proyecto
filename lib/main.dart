@@ -1,6 +1,6 @@
 //import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:admin_dashboard/providers/favorites_provider.dart';
-import 'package:admin_dashboard/providers/product_provider.dart';
+import 'package:admin_dashboard/providers/product_notifier.dart';
 import 'package:admin_dashboard/ui/shared/Widgets/custom_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

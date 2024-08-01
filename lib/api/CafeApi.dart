@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -18,7 +17,7 @@ class CafeApi {
       return resp.data;
     } on DioException catch (e) {
       print(e.response);
-      throw ('Error en el GET');
+      throw ('Error en el GET API');
     }
   }
 
@@ -69,6 +68,22 @@ class CafeApi {
     } catch (e) {
       print(e);
       throw ('Error en el PUT $e');
+    }
+  }
+
+  static final Dio _diogp = Dio(BaseOptions(
+    baseUrl: 'http://localhost:8080/api',
+    headers: {'x-token': LocalStorage.prefs.getString('token') ?? ''},
+    responseType: ResponseType.plain,
+  ));
+
+  static Future httpGetinicio(String path) async {
+    try {
+      final resp = await _diogp.get(path);
+      return resp.data;
+    } on DioException catch (e) {
+      print(e.response);
+      throw ('Error en el GET API products');
     }
   }
 }

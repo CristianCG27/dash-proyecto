@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:admin_dashboard/models/producto.dart';
-import 'package:admin_dashboard/services/helper.dart';
 import 'package:admin_dashboard/ui/buttons/category_btn.dart';
 import 'package:admin_dashboard/ui/shared/latest_shoes.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
 import 'package:admin_dashboard/ui/shared/Widgets/custom_spacer.dart';
+import 'package:admin_dashboard/services/navigation_service.dart';
 
 class ProductByCat extends StatefulWidget {
   const ProductByCat({super.key, required this.tabIndex});
@@ -27,15 +27,19 @@ class _ProductByCatState extends State<ProductByCat> with TickerProviderStateMix
 
   void getMale() {
     //_male = Helper().getMaleSneakers();
+    print('male by CAAAAAAT');
     _male = ProductsProvider().getMaleProducts();
+    print('maleeeeeee by caaaat');
   }
 
   void getFemale() {
-    _women = Helper().getFemaleSneakers();
+    //   _women = Helper().getFemaleSneakers();
+    _women = ProductsProvider().getMaleProducts();
   }
 
   void getKids() {
-    _kids = Helper().getKidsSneakers();
+    //   _kids = Helper().getKidsSneakers();
+    _kids = ProductsProvider().getMaleProducts();
   }
 
   @override
@@ -70,7 +74,7 @@ class _ProductByCatState extends State<ProductByCat> with TickerProviderStateMix
         child: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.fromLTRB(16, 45, 0, 0),
+              padding: const EdgeInsets.fromLTRB(16, 10, 0, 0),
               height: MediaQuery.of(context).size.height * 0.4,
               decoration: const BoxDecoration(
                   image:
@@ -79,13 +83,13 @@ class _ProductByCatState extends State<ProductByCat> with TickerProviderStateMix
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(6, 12, 16, 18),
+                    padding: const EdgeInsets.fromLTRB(6, 5, 16, 18),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            NavigationService.replaceTo('/dashboard/productos');
                           },
                           child: const Icon(
                             Icons.close,
@@ -130,7 +134,7 @@ class _ProductByCatState extends State<ProductByCat> with TickerProviderStateMix
             ),
             Padding(
               padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.12, left: 16, right: 12),
+                  top: MediaQuery.of(context).size.height * 0.2, left: 16, right: 12),
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: TabBarView(

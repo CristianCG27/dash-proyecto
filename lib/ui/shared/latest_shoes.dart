@@ -18,15 +18,21 @@ class LatestShoes extends StatelessWidget {
       future: _male,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
         } else if (snapshot.hasError) {
           return Text("Error ${snapshot.error}");
         } else {
+          print('****************************');
+          print(_male);
+          print('Este es el male de latest');
           final male = snapshot.data;
+          print(male!.length);
 
           //TODO:----------------------------------------
           return AlignedGridView.count(
-            crossAxisCount: 2,
+            crossAxisCount: 4,
             crossAxisSpacing: 20,
             mainAxisSpacing: 16,
             itemCount: male!.length,
@@ -38,10 +44,11 @@ class LatestShoes extends StatelessWidget {
             //         : MediaQuery.of(context).size.height * 0.3),
 
             itemBuilder: (context, index) {
+              print(snapshot.data![index]);
               final shoe = snapshot.data![index];
 
               return StaggerTile(
-                  imageUrl: shoe.imageUrl[1], name: shoe.name, price: "\$${shoe.price}");
+                  imageUrl: shoe.img[0], name: shoe.nombre, price: "\$${shoe.precio}");
             },
           );
           //TODO:-----------------------------------------

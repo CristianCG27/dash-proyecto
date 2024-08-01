@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:admin_dashboard/models/producto.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
-import 'package:admin_dashboard/providers/product_provider.dart';
+import 'package:admin_dashboard/providers/product_notifier.dart';
 import 'package:admin_dashboard/ui/shared/new_shoes.dart';
-import 'package:admin_dashboard/ui/views/product_view.dart';
 import 'package:admin_dashboard/ui/cards/product_card.dart';
-import 'package:admin_dashboard/ui/views/product_by_cat.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({
@@ -26,7 +24,7 @@ class HomeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.505,
+          height: MediaQuery.of(context).size.height * 0.450,
           width: MediaQuery.of(context).size.width,
           child: FutureBuilder<List<Producto>>(
             future: _male,
@@ -37,24 +35,7 @@ class HomeWidget extends StatelessWidget {
                 );
               } else if (snapshot.hasError) {
                 return Text("Error ${snapshot.error}");
-              }
-              // if (snapshot.connectionState == ConnectionState.waiting) {
-              //   print('ok prod  1');
-              //   print(snapshot);
-              //   return const CircularProgressIndicator();
-              // } else if (snapshot.connectionState == ConnectionState.done) {
-              //   print('ok prod  DONE');
-
-              //   final male = snapshot.data;
-              //   return Text(
-              //     male.toString(),
-              //   );
-              // } else if (snapshot.hasError) {
-              //   print('ok prod  2');
-              //   return Text("Error ${snapshot.error}");
-              // }
-
-              else {
+              } else {
                 print(snapshot);
                 final male = snapshot.data;
                 return ListView.builder(
@@ -64,9 +45,13 @@ class HomeWidget extends StatelessWidget {
                     final shoe = snapshot.data![index];
                     return GestureDetector(
                       onTap: () {
+                        productNofier.shoesSizes = shoe.tallas;
+                        print(productNofier.shoeSizes);
                         NavigationService.replaceTo(
-                            '/dashboard/productos/${shoe.id}' + '/' + '${shoe.category}');
+                            '/dashboard/productos/${shoe.productoPara}/${shoe.id}');
+
                         // productNofier.shoesSizes = shoe.sizes;
+
                         // print(productNofier.shoeSizes);
                         // Navigator.push(
                         //     context,
@@ -75,11 +60,12 @@ class HomeWidget extends StatelessWidget {
                         //             ProductView(id: shoe.id, category: shoe.category)));
                       },
                       child: ProductCard(
-                          price: "\$${shoe.price}",
-                          category: shoe.category,
+                          price: "\$${shoe.precio}",
+                          category: shoe.categoria,
                           id: shoe.id,
-                          name: shoe.name,
-                          image: shoe.imageUrl[0]),
+                          name: shoe.nombre,
+                          image: shoe.img[0],
+                          para: shoe.productoPara),
                     );
 
                     //     Padding(
@@ -99,7 +85,7 @@ class HomeWidget extends StatelessWidget {
         Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+              padding: const EdgeInsets.fromLTRB(12, 15, 12, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -109,15 +95,27 @@ class HomeWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print(tabIndex);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductByCat(
-                            tabIndex: tabIndex,
-                          ),
-                        ),
-                      );
+                      var para = '';
+                      if (tabIndex == 0) {
+                        para = 'hombre';
+                      } else if (tabIndex == 1) {
+                        para = 'mujer';
+                      } else if (tabIndex == 2) {
+                        para = 'nino';
+                      } else {
+                        print('Error en el index');
+                      }
+                      NavigationService.replaceTo('/dashboard/productos/$para');
+
+                      // print(tabIndex);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => ProductByCat(
+                      //       tabIndex: tabIndex,
+                      //     ),
+                      //   ),
+                      // );
                     },
                     child: Row(
                       children: [
@@ -152,7 +150,7 @@ class HomeWidget extends StatelessWidget {
                     final shoe = snapshot.data![index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: NewShoes(imageUrl: shoe.imageUrl[1]),
+                      child: NewShoes(imageUrl: shoe.img[0]),
                     );
                   },
                 );

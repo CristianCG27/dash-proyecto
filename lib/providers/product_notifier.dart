@@ -1,6 +1,3 @@
-import 'package:admin_dashboard/models/http/product_response.dart';
-import 'package:admin_dashboard/models/producto.dart';
-import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:flutter/material.dart';
 
 class ProductNotifier extends ChangeNotifier {
@@ -37,6 +34,8 @@ class ProductNotifier extends ChangeNotifier {
 
   set sizes(List<String> newSizes) {
     _sizes = newSizes;
+    print(_sizes);
+    print(_shoeSizes);
     notifyListeners();
   }
 }

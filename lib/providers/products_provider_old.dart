@@ -1,22 +1,83 @@
 import 'package:admin_dashboard/api/CafeApi.dart';
-import 'package:admin_dashboard/models/http/product_response.dart';
+import 'package:admin_dashboard/models/category.dart';
 import 'package:admin_dashboard/models/producto.dart';
 import 'package:flutter/material.dart';
 
 class ProductsProvider extends ChangeNotifier {
-  Future<List<Producto>> getMaleProducts() async {
-    final resp = await CafeApi.httpGet('/productos');
-    final productResp = ProductResponse.fromJson(resp);
+  List<Producto> male = [];
+  List<Producto> female = [];
+  List<Producto> kids = [];
 
-    if (resp.statusCode == 200) {
-      var productos = [...productResp.productos];
-      //var productos = productoFromJson(productResp.);
-      var male = productos.where((element) => element.category == "Men's Running");
-      return male.toList();
-    } else {
-      throw Exception('Failed to load jobs list');
+  List<Categoria> categorias = [];
+  bool isLoading = true;
+
+  Future<List<Producto>> getMaleProducts() async {
+    final resp = await CafeApi.httpGetinicio('/productos');
+    final maleList = productoFromJson(resp);
+
+    var male = maleList.where((element) => element.productoPara == "hombre");
+    isLoading = false;
+    notifyListeners();
+    return male.toList();
+  }
+
+  Future<Producto?> getMaleProductById(String id) async {
+    try {
+      final resp = await CafeApi.httpGet('/productos/$id');
+
+      var producto = Producto.fromJson(resp);
+
+      return producto;
+    } catch (e) {
+      return null;
     }
   }
+
+  Future<List<Producto>> getfeMaleProducts() async {
+    final resp = await CafeApi.httpGetinicio('/productos');
+    final femaleList = productoFromJson(resp);
+
+    var female = femaleList.where((element) => element.productoPara == "mujer");
+    isLoading = false;
+    notifyListeners();
+    return female.toList();
+  }
+
+  Future<Producto?> getfeMaleProductById(String id) async {
+    try {
+      final resp = await CafeApi.httpGet('/productos/$id');
+
+      var producto = Producto.fromJson(resp);
+
+      return producto;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<List<Producto>> getKidsProducts() async {
+    final resp = await CafeApi.httpGetinicio('/productos');
+    final kidsList = productoFromJson(resp);
+
+    var kids = kidsList.where((element) => element.productoPara == "nino");
+    isLoading = false;
+    notifyListeners();
+    return kids.toList();
+  }
+
+  Future<Producto?> getKidsProductById(String id) async {
+    try {
+      final resp = await CafeApi.httpGet('/productos/$id');
+
+      var producto = Producto.fromJson(resp);
+
+      return producto;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  
 }
 
 

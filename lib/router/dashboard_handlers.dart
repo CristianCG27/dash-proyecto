@@ -1,5 +1,6 @@
 //import 'package:admin_dashboard/ui/views/products_view_old.dart';
 import 'package:admin_dashboard/ui/views/new_products_view.dart';
+import 'package:admin_dashboard/ui/views/product_by_cat.dart';
 import 'package:admin_dashboard/ui/views/product_view.dart';
 
 import 'package:admin_dashboard/ui/views/user_view.dart';
@@ -140,10 +141,39 @@ class DashboardHandlers {
         if (params['id']?.first != null) {
           return ProductView(
             id: params['id']!.first,
-            category: params['category']!.first,
+            para: params['para']!.first,
           );
         } else {
-          return UsersView();
+          return NewProductsView();
+        }
+        //return const NewProductsView(); //ProductosView();
+      } else {
+        return LoginView();
+      }
+    },
+  );
+
+  static Handler productoPara = Handler(
+    handlerFunc: (context, params) {
+      final authProvider = Provider.of<AuthProvider>(context!);
+      Provider.of<SideMenuProvider>(context, listen: false)
+          .setCurrentPageUrl(Flurorouter.productoRoute);
+
+      var index = 0;
+      if (authProvider.authStatus == AuthStatus.authenticated) {
+        //print(params['para'].toString());
+        if (params['para']?.first != null) {
+          //print(params);
+          if (params['para'].toString() == '[hombre]') {
+            index = 0;
+          } else if (params['para'].toString() == '[mujer]') {
+            index = 1;
+          } else if (params['para'].toString() == '[nino]') {
+            index = 2;
+          }
+          return ProductByCat(tabIndex: index);
+        } else {
+          return NewProductsView();
         }
         //return const NewProductsView(); //ProductosView();
       } else {
