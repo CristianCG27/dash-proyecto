@@ -20,7 +20,7 @@ class CustomTitle extends StatelessWidget {
             width: 50,
             height: 50,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           FittedBox(
             
             fit: BoxFit.contain,

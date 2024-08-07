@@ -51,7 +51,7 @@ class RegisterView extends StatelessWidget {
                           icon: Icons.person_sharp,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       // Email
                       TextFormField(

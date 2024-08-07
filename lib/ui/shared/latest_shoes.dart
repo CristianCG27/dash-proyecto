@@ -24,11 +24,11 @@ class LatestShoes extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text("Error ${snapshot.error}");
         } else {
-          print('****************************');
-          print(_male);
-          print('Este es el male de latest');
+          //print('****************************');
+          //print(_male);
+          //print('Este es el male de latest');
           final male = snapshot.data;
-          print(male!.length);
+          //print(male!.length);
 
           //TODO:----------------------------------------
           return AlignedGridView.count(
@@ -44,7 +44,7 @@ class LatestShoes extends StatelessWidget {
             //         : MediaQuery.of(context).size.height * 0.3),
 
             itemBuilder: (context, index) {
-              print(snapshot.data![index]);
+              //print(snapshot.data![index]);
               final shoe = snapshot.data![index];
 
               return StaggerTile(

@@ -173,8 +173,8 @@ class _UserViewForm extends StatelessWidget {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.indigo),
-                  shadowColor: MaterialStateProperty.all(Colors.indigo),
+                  backgroundColor: WidgetStateProperty.all(Colors.indigo),
+                  shadowColor: WidgetStateProperty.all(Colors.indigo),
                 ),
                 child: const Row(
                   children: [

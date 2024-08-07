@@ -51,7 +51,7 @@ class _DesktopBody extends StatelessWidget {
       child: Row(
         children: [
           //Background
-          Expanded(child: BackgroundZ()),
+          const Expanded(child: BackgroundZ()),
           //BackgroundZ(),
 
           //Form ViewContainer
@@ -63,9 +63,9 @@ class _DesktopBody extends StatelessWidget {
             color: Colors.black,
             child: Column(
               children: [
-                SizedBox(height: 20),
-                CustomTitle(),
-                SizedBox(height: 50),
+                const SizedBox(height: 20),
+                const CustomTitle(),
+                const SizedBox(height: 50),
                 //Campos para formulario
                 Expanded(child: child)
               ],
@@ -93,16 +93,16 @@ class _MobileBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          CustomTitle(),
-          Container(
+          const CustomTitle(),
+          SizedBox(
             width: double.infinity,
             height: 420,
             child: child,
           ),
-          Container(
+          const SizedBox(
             width: double.infinity,
             height: 400,
             child: BackgroundZ(),

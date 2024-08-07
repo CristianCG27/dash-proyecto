@@ -104,7 +104,7 @@ class DashboardHandlers {
           .setCurrentPageUrl(Flurorouter.userRoute);
 
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        print(params);
+        //print(params);
         if (params['uid']?.first != null) {
           return UserView(uid: params['uid']!.first);
         } else {
@@ -137,7 +137,7 @@ class DashboardHandlers {
           .setCurrentPageUrl(Flurorouter.productoRoute);
 
       if (authProvider.authStatus == AuthStatus.authenticated) {
-        print(params);
+        //print(params);
         if (params['id']?.first != null) {
           return ProductView(
             id: params['id']!.first,
@@ -173,7 +173,7 @@ class DashboardHandlers {
           }
           return ProductByCat(tabIndex: index);
         } else {
-          return NewProductsView();
+          return const NewProductsView();
         }
         //return const NewProductsView(); //ProductosView();
       } else {

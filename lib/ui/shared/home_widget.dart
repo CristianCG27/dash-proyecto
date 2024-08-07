@@ -36,7 +36,7 @@ class HomeWidget extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Text("Error ${snapshot.error}");
               } else {
-                print(snapshot);
+                //print(snapshot);
                 final male = snapshot.data;
                 return ListView.builder(
                   itemCount: male!.length,
@@ -45,8 +45,9 @@ class HomeWidget extends StatelessWidget {
                     final shoe = snapshot.data![index];
                     return GestureDetector(
                       onTap: () {
+                        print("Aqui se hace tappp....");
                         productNofier.shoesSizes = shoe.tallas;
-                        print(productNofier.shoeSizes);
+                        print(productNofier.shoeeSizes.toString());
                         NavigationService.replaceTo(
                             '/dashboard/productos/${shoe.productoPara}/${shoe.id}');
 

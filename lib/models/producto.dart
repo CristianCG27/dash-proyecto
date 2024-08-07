@@ -113,9 +113,22 @@ class Talla {
         "_id": id,
       };
 }
+// List<Talla> tallaFromJson(String str) {
+//     Map<String, dynamic> jsonMap = jsonDecode(str);
+//     List<dynamic> tallasJson = jsonMap['tallas'];
+//     // Extrae la lista de tallas
+//     List<Talla> tallas = tallasJson.map((tallaJson) => Talla.fromJson(tallaJson)).toList();
+//     // Convierte cada elemento de la lista en un objeto Talla
 
+//     // Imprime las tallas para verificar
+//     tallas.forEach((talla) {
+//       print('Talla: ${talla.talla}, isSelected: ${talla.isSelected}, ID: ${talla.id}');
+//     });
 
+//     return tallas;
+//   }
 
+  
 
 
 
