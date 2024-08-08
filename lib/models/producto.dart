@@ -3,6 +3,7 @@
 //     final producto = productoFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:admin_dashboard/models/posicion.dart';
 
 List<Producto> productoFromJson(String str) =>
     List<Producto>.from(json.decode(str).map((x) => Producto.fromJson(x)));
@@ -18,8 +19,7 @@ class Producto {
   final String categoria;
   final bool disponible;
   final List<String> img;
-  final List<dynamic> tallas;
-  final List<Posicion> posicion;
+  final List<Talla> tallas;
   final String descripcion;
   final String productoPara;
 
@@ -32,7 +32,6 @@ class Producto {
     required this.disponible,
     required this.img,
     required this.tallas,
-    required this.posicion,
     required this.descripcion,
     required this.productoPara,
   });
@@ -45,8 +44,7 @@ class Producto {
         categoria: json["categoria"],
         disponible: json["disponible"],
         img: List<String>.from(json["img"].map((x) => x)),
-        tallas: List<dynamic>.from(json["tallas"].map((x) => Talla.fromJson(x))),
-        posicion: List<Posicion>.from(json["posicion"].map((x) => Posicion.fromJson(x))),
+        tallas: List<Talla>.from(json["tallas"].map((x) => Talla.fromJson(x))),
         descripcion: json["descripcion"],
         productoPara: json["productoPara"],
       );
@@ -60,59 +58,217 @@ class Producto {
         "disponible": disponible,
         "img": List<dynamic>.from(img.map((x) => x)),
         "tallas": List<dynamic>.from(tallas.map((x) => x.toJson())),
-        "posicion": List<dynamic>.from(posicion.map((x) => x.toJson())),
         "descripcion": descripcion,
         "productoPara": productoPara,
-      };
-}
-
-class Posicion {
-  final String posx;
-  final String posy;
-  final String id;
-
-  Posicion({
-    required this.posx,
-    required this.posy,
-    required this.id,
-  });
-
-  factory Posicion.fromJson(Map<String, dynamic> json) => Posicion(
-        posx: json["posx"],
-        posy: json["posy"],
-        id: json["_id"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "posx": posx,
-        "posy": posy,
-        "_id": id,
       };
 }
 
 class Talla {
   final String talla;
   final bool isSelected;
+  final List<Posicion> posicion;
   final String id;
 
   Talla({
     required this.talla,
     required this.isSelected,
+    required this.posicion,
     required this.id,
   });
 
   factory Talla.fromJson(Map<String, dynamic> json) => Talla(
         talla: json["talla"],
         isSelected: json["isSelected"],
+        posicion: List<Posicion>.from(json["posicion"].map((x) => Posicion.fromJson(x))),
         id: json["_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "talla": talla,
         "isSelected": isSelected,
+        "posicion": List<dynamic>.from(posicion.map((x) => x.toJson())),
         "_id": id,
       };
 }
+
+
+
+
+
+
+
+
+
+
+
+// //TODO VERSION ANTERIOR DEL MODELO
+
+// List<Producto> productoFromJson(String str) =>
+//     List<Producto>.from(json.decode(str).map((x) => Producto.fromJson(x)));
+
+// String productoToJson(List<Producto> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// class Producto {
+//   final String id;
+//   final String nombre;
+//   final String usuario;
+//   final int precio;
+//   final String categoria;
+//   final bool disponible;
+//   final List<String> img;
+//   final List<dynamic> tallas;
+//   final List<Posicion> posicion;
+//   final String descripcion;
+//   final String productoPara;
+
+//   Producto({
+//     required this.id,
+//     required this.nombre,
+//     required this.usuario,
+//     required this.precio,
+//     required this.categoria,
+//     required this.disponible,
+//     required this.img,
+//     required this.tallas,
+//     required this.posicion,
+//     required this.descripcion,
+//     required this.productoPara,
+//   });
+
+//   factory Producto.fromJson(Map<String, dynamic> json) => Producto(
+//         id: json["_id"],
+//         nombre: json["nombre"],
+//         usuario: json["usuario"],
+//         precio: json["precio"],
+//         categoria: json["categoria"],
+//         disponible: json["disponible"],
+//         img: List<String>.from(json["img"].map((x) => x)),
+//         tallas: List<dynamic>.from(json["tallas"].map((x) => Talla.fromJson(x))),
+//         posicion: List<Posicion>.from(json["posicion"].map((x) => Posicion.fromJson(x))),
+//         descripcion: json["descripcion"],
+//         productoPara: json["productoPara"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "_id": id,
+//         "nombre": nombre,
+//         "usuario": usuario,
+//         "precio": precio,
+//         "categoria": categoria,
+//         "disponible": disponible,
+//         "img": List<dynamic>.from(img.map((x) => x)),
+//         "tallas": List<dynamic>.from(tallas.map((x) => x.toJson())),
+//         "posicion": List<dynamic>.from(posicion.map((x) => x.toJson())),
+//         "descripcion": descripcion,
+//         "productoPara": productoPara,
+//       };
+// }
+
+// class Posicion {
+//   final String posx;
+//   final String posy;
+//   final String id;
+
+//   Posicion({
+//     required this.posx,
+//     required this.posy,
+//     required this.id,
+//   });
+
+//   factory Posicion.fromJson(Map<String, dynamic> json) => Posicion(
+//         posx: json["posx"],
+//         posy: json["posy"],
+//         id: json["_id"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "posx": posx,
+//         "posy": posy,
+//         "_id": id,
+//       };
+// }
+
+// class Talla {
+//   final String talla;
+//   final bool isSelected;
+//   final String id;
+
+//   Talla({
+//     required this.talla,
+//     required this.isSelected,
+//     required this.id,
+//   });
+
+//   factory Talla.fromJson(Map<String, dynamic> json) => Talla(
+//         talla: json["talla"],
+//         isSelected: json["isSelected"],
+//         id: json["_id"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "talla": talla,
+//         "isSelected": isSelected,
+//         "_id": id,
+//       };
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//TODO   aqui se realizo una prueba para las tallas
+
+
 // List<Talla> tallaFromJson(String str) {
 //     Map<String, dynamic> jsonMap = jsonDecode(str);
 //     List<dynamic> tallasJson = jsonMap['tallas'];

@@ -320,6 +320,8 @@ class _ProductViewState extends State<ProductView> {
                                                             horizontal: 2.0),
                                                         child: GestureDetector(
                                                           onTap: () {
+                                                            print(sizes.posicion[0].toString());
+
                                                             setState(() {
                                                               // for (int i = 0;
                                                               //     i <
@@ -342,9 +344,9 @@ class _ProductViewState extends State<ProductView> {
                                                             });
                                                           },
                                                           child: Container(
-                                                            margin: EdgeInsets.symmetric(
+                                                            margin: const EdgeInsets.symmetric(
                                                                 horizontal: 8.0),
-                                                            padding: EdgeInsets.symmetric(
+                                                            padding: const EdgeInsets.symmetric(
                                                                 vertical: 10.0, horizontal: 20.0),
                                                             decoration: BoxDecoration(
                                                               color: sizes.isSelected
@@ -356,7 +358,7 @@ class _ProductViewState extends State<ProductView> {
                                                                   Border.all(color: Colors.blue),
                                                             ),
                                                             child: Text(
-                                                              sizes.isSelected.toString(),
+                                                              sizes.posicion.toString(),
                                                               style: TextStyle(
                                                                 color: sizes.isSelected
                                                                     ? Colors.white

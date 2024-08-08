@@ -96,21 +96,23 @@ class _ProductCardState extends State<ProductCard> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      widget.name,
-                      style: appstyleWithHt(18, Colors.black, FontWeight.bold, 1.1),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.para,
-                      style: appstyleWithHt(15, Colors.grey, FontWeight.bold, 1.5),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.name,
+                        style: appstyleWithHt(18, Colors.black, FontWeight.bold, 1.1),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.para,
+                        style: appstyleWithHt(15, Colors.grey, FontWeight.bold, 1.5),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               //const SizedBox(height: 15),

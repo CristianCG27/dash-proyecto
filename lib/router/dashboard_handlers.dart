@@ -164,6 +164,7 @@ class DashboardHandlers {
         //print(params['para'].toString());
         if (params['para']?.first != null) {
           //print(params);
+          //print("Entra a if");
           if (params['para'].toString() == '[hombre]') {
             index = 0;
           } else if (params['para'].toString() == '[mujer]') {
@@ -171,6 +172,8 @@ class DashboardHandlers {
           } else if (params['para'].toString() == '[nino]') {
             index = 2;
           }
+
+          //print(index);
           return ProductByCat(tabIndex: index);
         } else {
           return const NewProductsView();

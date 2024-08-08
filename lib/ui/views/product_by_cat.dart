@@ -34,12 +34,12 @@ class _ProductByCatState extends State<ProductByCat> with TickerProviderStateMix
 
   void getFemale() {
     //   _women = Helper().getFemaleSneakers();
-    _women = ProductsProvider().getMaleProducts();
+    _women = ProductsProvider().getfeMaleProducts();
   }
 
   void getKids() {
     //   _kids = Helper().getKidsSneakers();
-    _kids = ProductsProvider().getMaleProducts();
+    _kids = ProductsProvider().getKidsProducts();
   }
 
   @override
