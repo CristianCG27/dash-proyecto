@@ -26,10 +26,10 @@ class Posicion {
         "_id": id,
       };
 
-  @override
-  String toString() {
-    return '$px , $py';
-  }
+  // @override
+  // String toString() {
+  //   return '$px , $py';
+  // }
 
   
 

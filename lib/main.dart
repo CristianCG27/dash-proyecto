@@ -1,6 +1,6 @@
 //import 'package:admin_dashboard/providers/products_provider_old.dart';
+import 'package:admin_dashboard/providers/data_provider.dart';
 import 'package:admin_dashboard/providers/favorites_provider.dart';
-import 'package:admin_dashboard/providers/product_notifier.dart';
 import 'package:admin_dashboard/ui/shared/Widgets/custom_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +51,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UsersProvider()),
         ChangeNotifierProvider(create: (_) => UserFormProvider()),
         ChangeNotifierProvider(create: (context) => FavoritesNotifier()),
+        ChangeNotifierProvider(create: (context) =>DataProvider())
       ],
       child: const MyApp(),
     );

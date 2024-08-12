@@ -13,7 +13,7 @@ class Logo extends StatelessWidget {
         children: [
           const Icon(
             Icons.bubble_chart_outlined,
-            color: Color(0xff7A6BF5),
+            color: Color.fromARGB(255, 95, 93, 131),
             size: 40,
           ),
           const SizedBox(

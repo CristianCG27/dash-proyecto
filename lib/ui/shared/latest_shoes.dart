@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -47,8 +48,18 @@ class LatestShoes extends StatelessWidget {
               //print(snapshot.data![index]);
               final shoe = snapshot.data![index];
 
-              return StaggerTile(
-                  imageUrl: shoe.img[0], name: shoe.nombre, price: "\$${shoe.precio}");
+              return GestureDetector(
+                onTap: () {
+                  NavigationService.replaceTo(
+                      '/dashboard/productos/${shoe.productoPara}/${shoe.id}');
+                },
+                child: StaggerTile(
+                    imageUrl: shoe.img[0],
+                    name: shoe.nombre,
+                    price: "\$${shoe.precio}",
+                    productoPara: shoe.productoPara,
+                    id: shoe.id),
+              );
             },
           );
           //TODO:-----------------------------------------

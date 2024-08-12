@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
 
 class StaggerTile extends StatefulWidget {
-  const StaggerTile({super.key, required this.imageUrl, required this.name, required this.price});
+  const StaggerTile({super.key, required this.imageUrl, required this.name, required this.price, required this.productoPara, required this.id});
   final String imageUrl;
   final String name;
   final String price;
+  final String productoPara;
+  final String id;
 
   @override
   State<StaggerTile> createState() => _StaggerTileState();

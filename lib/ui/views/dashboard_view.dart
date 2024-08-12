@@ -26,10 +26,6 @@ class DashboardView extends StatelessWidget {
             title: user.nombre,
             child: Text(user.correo),
           ),
-          Text(
-            'Dashboard View',
-            style: CustomLabels.h1,
-          ),
         ],
       ),
     );

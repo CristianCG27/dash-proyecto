@@ -1,19 +1,21 @@
 import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
+import 'package:admin_dashboard/ui/buttons/order_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hive/hive.dart';
+import 'package:admin_dashboard/ui/shared/Widgets/custom_size_select.dart';
 
 import 'package:provider/provider.dart';
 
 import 'package:admin_dashboard/models/producto.dart';
 import 'package:admin_dashboard/providers/product_notifier.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
-import 'package:admin_dashboard/ui/buttons/checkout_btn.dart';
 import 'package:admin_dashboard/providers/favorites_provider.dart';
+//import 'package:admin_dashboard/ui/buttons/checkout_btn.dart';
 //import 'package:tienda_online/views/ui/favorites_page.dart';
 
 class ProductView extends StatefulWidget {
@@ -205,7 +207,8 @@ class _ProductViewState extends State<ProductView> {
 
                               Container(
                                 padding: EdgeInsets.only(
-                                    top: MediaQuery.of(context).size.height * 0.365),
+                                    top: MediaQuery.of(context).size.height * 0.365, bottom: 50),
+
                                 //top: MediaQuery.of(context).size.height * 0.365,
                                 //width: MediaQuery.of(context).size.height * 1.67,
                                 child: ClipRRect(
@@ -219,8 +222,9 @@ class _ProductViewState extends State<ProductView> {
                                     color: Colors.white,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                      child: ListView(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        //crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             producto.nombre,
@@ -301,120 +305,25 @@ class _ProductViewState extends State<ProductView> {
                                               ),
                                               const SizedBox(height: 10),
                                               SizedBox(
-                                                height: 100,
+                                                height: 30,
                                                 //width: MediaQuery.of(context).size.width * 0.5,
                                                 child: ListView.builder(
                                                   itemCount: productNotifier.shoeeSizes.length,
-
-                                                  ///
                                                   scrollDirection: Axis.horizontal,
                                                   padding: EdgeInsets.zero,
 
                                                   ///
                                                   itemBuilder: (context, index) {
                                                     final sizes = productNotifier.shoeeSizes[index];
-                                                    print(productNotifier.shoeeSizes.length);
-                                                    print('++++++++++++++++++++++++++');
-                                                    return Padding(
-                                                        padding: const EdgeInsets.symmetric(
-                                                            horizontal: 2.0),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            print(sizes.posicion[0].toString());
-
-                                                            setState(() {
-                                                              // for (int i = 0;
-                                                              //     i <
-                                                              //         productNotifier
-                                                              //             .shoeeSizes.length;
-                                                              //     i++) {
-                                                              //   if (i == index) {
-                                                              //     i.isSelected ==!i.isSelected;
-                                                              //   }
-                                                              // }
-                                                              for (var i
-                                                                  in productNotifier.shoeeSizes) {
-                                                                if (i == index) {
-                                                                  i.isSelected == !i.isSelected;
-                                                                }
-                                                                //i.isSelected = false;
-                                                              }
-                                                              // sizes.isSelected = true;
-                                                              productNotifier.toggleCheck();
-                                                            });
-                                                          },
-                                                          child: Container(
-                                                            margin: const EdgeInsets.symmetric(
-                                                                horizontal: 8.0),
-                                                            padding: const EdgeInsets.symmetric(
-                                                                vertical: 10.0, horizontal: 20.0),
-                                                            decoration: BoxDecoration(
-                                                              color: sizes.isSelected
-                                                                  ? Colors.green
-                                                                  : Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius.circular(5.0),
-                                                              border:
-                                                                  Border.all(color: Colors.blue),
-                                                            ),
-                                                            child: Text(
-                                                              sizes.posicion.toString(),
-                                                              style: TextStyle(
-                                                                color: sizes.isSelected
-                                                                    ? Colors.white
-                                                                    : Colors.blue,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        )
-
-                                                        // ChoiceChip(
-                                                        //   shape: RoundedRectangleBorder(
-                                                        //     borderRadius: BorderRadius.circular(60),
-                                                        //     side: const BorderSide(
-                                                        //         color: Colors.black,
-                                                        //         width: 1,
-                                                        //         style: BorderStyle.solid),
-                                                        //   ),
-                                                        //   disabledColor: Colors.white,
-                                                        //   label: Text(
-                                                        //     sizes.talla,
-                                                        //     style: appstyle(
-                                                        //         15,
-                                                        //         sizes.isSelected
-                                                        //             ? Colors.green
-                                                        //             : Colors.red,
-                                                        //         FontWeight.w500),
-                                                        //   ),
-                                                        //   selectedColor: Colors.black,
-                                                        //   padding:
-                                                        //       const EdgeInsets.symmetric(vertical: 8),
-                                                        //   selected: sizes.isSelected,
-                                                        //   onSelected: (newState) {
-
-                                                        //       productNotifier.shoeeSizes[index].isSelected = ! productNotifier.shoeeSizes[index].isSelected;
-                                                        //     //   if (productNotifier.sizes
-                                                        //     //       .contains(sizes['size'])) {
-                                                        //     //     productNotifier.sizes
-                                                        //     //         .remove(sizes['size']);
-                                                        //     //   } else {
-                                                        //     //     productNotifier.sizes
-                                                        //     //         .add(sizes['size']);
-                                                        //     //   }
-
-                                                        //     for (int i = 0;
-                                                        //         i < productNotifier.shoeeSizes.length;
-                                                        //         i++) {
-                                                        //       if (i == index) {
-                                                        //         sizes.isSelected = !sizes.isSelected;
-                                                        //       }
-                                                        //     }
-
-                                                        //     productNotifier.toggleCheck(index);
-                                                        //   },
-                                                        // ),
-                                                        );
+                                                    // print(productNotifier.shoeeSizes.length);
+                                                    // print('++++++++++++++++++++++++++');
+                                                    return CustomSizeSelect(
+                                                        //tallas: sizes,
+                                                        // indx: index,
+                                                        // tamano: productNotifier.shoeeSizes.length,
+                                                        talla: sizes.talla,
+                                                        posicion: sizes.posicion,
+                                                        isSelected: sizes.isSelected);
                                                   },
                                                 ),
                                               ),
@@ -445,27 +354,30 @@ class _ProductViewState extends State<ProductView> {
                                             style: appstyle(12, Colors.black, FontWeight.normal),
                                           ),
                                           const SizedBox(height: 5),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 70),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(horizontal: 70),
                                             child: Padding(
-                                              padding: const EdgeInsets.only(top: 12),
-                                              child: CheckOutBtn(
-                                                  onTap: () async {
-                                                    _createCart({
-                                                      "id": producto.id,
-                                                      "name": producto.nombre,
-                                                      "category": producto.categoria,
-                                                      //"sizes": productNotifier.sizes,
-                                                      "imageUrl": producto.img[0],
-                                                      "price": producto.precio,
-                                                      "qty": 1
-                                                    });
-                                                    //productNotifier.sizes.clear();
-                                                    Navigator.pop(context);
-                                                  },
-                                                  label: "Ordenar"),
+                                              padding: EdgeInsets.only(top: 12),
+                                              child: OrderBtn(label: "Ordenar cA", time: 5000),
+                                              // CheckOutBtn(
+                                              //     onTap: () async {
+
+                                              //       // _createCart({
+                                              //       //   "id": producto.id,
+                                              //       //   "name": producto.nombre,
+                                              //       //   "category": producto.categoria,
+                                              //       //   //"sizes": productNotifier.sizes,
+                                              //       //   "imageUrl": producto.img[0],
+                                              //       //   "price": producto.precio,
+                                              //       //   "qty": 1
+                                              //       // });
+                                              //       //productNotifier.sizes.clear();
+                                              //       Navigator.pop(context);
+                                              //     },
+                                              //     label: "Ordenar"),
                                             ),
                                           ),
+                                          const SizedBox(height: 50),
                                         ],
                                       ),
                                     ),

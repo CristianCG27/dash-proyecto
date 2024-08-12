@@ -41,7 +41,7 @@ class Sidebar extends StatelessWidget {
             },
           ),
           MenuItem(
-            text: 'Ordenes',
+            text: 'Ordenes XX',
             icon: Icons.shopping_cart_outlined,
             //isActive: false,
             onPressed: () {},
@@ -65,7 +65,7 @@ class Sidebar extends StatelessWidget {
             },
           ),
           MenuItem(
-            text: 'Discount',
+            text: 'Discount XX',
             icon: Icons.attach_money_outlined,
             //isActive: false,
             onPressed: () {},
@@ -91,20 +91,20 @@ class Sidebar extends StatelessWidget {
             },
           ),
           MenuItem(
-            text: 'Marketing',
+            text: 'Marketing  XX',
             icon: Icons.mark_email_read_outlined,
             //isActive: false,
             onPressed: () {},
           ),
           MenuItem(
-            text: 'Campaign',
+            text: 'Campaign  XX',
             icon: Icons.note_add_outlined,
             //isActive: false,
             onPressed: () {},
           ),
           MenuItem(
             isActive: sideMenuProvider.currentPage == Flurorouter.blankRoute,
-            text: 'Blank',
+            text: 'Blank  XX',
             icon: Icons.post_add_outlined,
             onPressed: () {
               navigateTo(Flurorouter.blankRoute);
@@ -129,8 +129,8 @@ class Sidebar extends StatelessWidget {
     return const BoxDecoration(
       gradient: LinearGradient(
         colors: [
-          Color(0xff092044),
-          Color(0xff092042),
+          Color.fromARGB(255, 13, 17, 22),
+          Color.fromARGB(255, 29, 37, 49),
         ],
       ),
       boxShadow: [

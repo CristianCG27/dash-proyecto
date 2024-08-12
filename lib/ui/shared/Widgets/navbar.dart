@@ -1,5 +1,4 @@
 import 'package:admin_dashboard/providers/sidemenu_provider.dart';
-import 'package:admin_dashboard/ui/shared/Widgets/search_text.dart';
 import 'package:flutter/material.dart';
 
 import 'navbar_avatar.dart';
