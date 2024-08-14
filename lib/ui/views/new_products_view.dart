@@ -21,6 +21,7 @@ class _NewProductsViewState extends State<NewProductsView> with TickerProviderSt
   void getMale() {
     //_male = Helper().getMaleSneakers();
     _male = ProductsProvider().getMaleProducts();
+    //print(_male);
   }
 
   void getFemale() {

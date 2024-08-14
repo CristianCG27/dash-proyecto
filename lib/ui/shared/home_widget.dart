@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/esp82_provider.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,8 +44,10 @@ class HomeWidget extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     final shoe = snapshot.data![index];
+                    print(shoe);
                     return GestureDetector(
                       onTap: () {
+                        getStatus();
                         print("Aqui se hace tappp....");
                         productNofier.shoesSizes = shoe.tallas;
                         print(productNofier.shoeeSizes.toString());

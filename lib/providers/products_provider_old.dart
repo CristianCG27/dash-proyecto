@@ -2,6 +2,8 @@ import 'package:admin_dashboard/api/CafeApi.dart';
 import 'package:admin_dashboard/models/category.dart';
 import 'package:admin_dashboard/models/producto.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ProductsProvider extends ChangeNotifier {
   List<Producto> male = [];
@@ -10,6 +12,34 @@ class ProductsProvider extends ChangeNotifier {
 
   List<Categoria> categorias = [];
   bool isLoading = true;
+
+  Future<List<Producto>> getAllProducts() async {
+    final resp = await http.get(Uri.parse('http://localhost:8080/api/productos'));
+    //print(resp);
+
+    isLoading = false;
+    notifyListeners();
+    List<dynamic> data = jsonDecode(resp.body);
+
+    return data.map((json) => Producto.fromJson(json)).toList();
+
+    // final productsList = productoFromJson(resp);
+    // print(object)
+
+    // isLoading = false;
+    // notifyListeners();
+    // return productsList.toList();
+    //final productsList = productoFromJson(resp);
+
+    // List<dynamic> data = jsonDecode(resp.body);
+    // isLoading = false;
+    // //notifyListeners();
+    // return data.map((item) => Producto.fromJson(item)).toList();
+
+    // // isLoading = false;
+    // // notifyListeners();
+    // // //return productsList.toList();
+  }
 
   Future<List<Producto>> getMaleProducts() async {
     final resp = await CafeApi.httpGetinicio('/productos');
@@ -76,8 +106,6 @@ class ProductsProvider extends ChangeNotifier {
       return null;
     }
   }
-
-  
 }
 
 

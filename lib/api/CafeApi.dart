@@ -86,4 +86,14 @@ class CafeApi {
       throw ('Error en el GET API products');
     }
   }
+
+  // static Future httpGetPoss(String path) async {
+  //   try {
+  //     final resp = await http.get(Uri.parse('http://localhost:8080/api$path'));
+  //     return resp.data;
+  //   } on DioException catch (e) {
+  //     print(e.response);
+  //     throw ('Error en el GET API');
+  //   }
+  // }
 }

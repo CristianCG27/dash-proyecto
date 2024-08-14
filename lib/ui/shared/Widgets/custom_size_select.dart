@@ -22,6 +22,7 @@ class _CustomSizeSelectState extends State<CustomSizeSelect> {
         padding: const EdgeInsets.symmetric(horizontal: 2.0),
         child: GestureDetector(
           onTap: () {
+            
             var posiciond = widget.posicion[0].toJson();
             //var selected = widget.isSelected;
             int tiempoAct = 0;
@@ -36,28 +37,6 @@ class _CustomSizeSelectState extends State<CustomSizeSelect> {
               widget.isSelected = !widget.isSelected; // Alternar el estado al hacer clic
             });
             print(widget.isSelected);
-
-            //print(posicion.toString());
-
-            //setState(() {
-            // for (int i = 0;
-            //     i <
-            //         productNotifier
-            //             .shoeeSizes.length;
-            //     i++) {
-            //   if (i == index) {
-            //     i.isSelected ==!i.isSelected;
-            //   }
-            // }
-            // for (var i in productNotifier.shoeeSizes) {
-            //   if (i == index) {
-            //     i.isSelected == !i.isSelected;
-            //   }
-            //   //i.isSelected = false;
-            // }
-            // // sizes.isSelected = true;
-            // productNotifier.toggleCheck();
-            //});
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 8.0),
