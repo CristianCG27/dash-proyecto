@@ -24,7 +24,6 @@
 //       };
 // }
 
-
 // class Talla {
 //     final String talla;
 //     final bool isSelected;
@@ -49,3 +48,6 @@
 //     };
 // }
 
+// To parse this JSON data, do
+//
+//     final producto = productoFromJson(jsonString);

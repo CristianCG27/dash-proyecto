@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-const String espUrl = 'http://192.168.137.129';
+const String espUrl = 'http://192.168.137.198';
 
 Future<void> getStatus() async {
   const url = '$espUrl/conected';

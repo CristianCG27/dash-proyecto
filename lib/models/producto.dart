@@ -64,12 +64,18 @@ class Producto {
 }
 
 class Talla {
+  final bool existencia;
+  final bool inEstante;
+  final int cantidad;
   final String talla;
   final bool isSelected;
   final List<Posicion> posicion;
   final String id;
 
   Talla({
+    required this.existencia,
+    required this.inEstante,
+    required this.cantidad,
     required this.talla,
     required this.isSelected,
     required this.posicion,
@@ -77,6 +83,9 @@ class Talla {
   });
 
   factory Talla.fromJson(Map<String, dynamic> json) => Talla(
+        existencia: json["existencia"],
+        inEstante: json["inEstante"],
+        cantidad: json["cantidad"],
         talla: json["talla"],
         isSelected: json["isSelected"],
         posicion: List<Posicion>.from(json["posicion"].map((x) => Posicion.fromJson(x))),
@@ -84,6 +93,9 @@ class Talla {
       );
 
   Map<String, dynamic> toJson() => {
+        "existencia": existencia,
+        "inEstante": inEstante,
+        "cantidad": cantidad,
         "talla": talla,
         "isSelected": isSelected,
         "posicion": List<dynamic>.from(posicion.map((x) => x.toJson())),

@@ -145,12 +145,12 @@
 // }
 
 import 'package:admin_dashboard/models/producto.dart';
+import 'package:admin_dashboard/ui/cards/dark_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:admin_dashboard/providers/auth_provider.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
-import '../cards/white_card.dart';
 import 'package:admin_dashboard/providers/products_provider_old.dart';
 
 class DashboardView extends StatelessWidget {
@@ -167,17 +167,44 @@ class DashboardView extends StatelessWidget {
           // Columna izquierda: Text y WhiteCard
           Expanded(
             flex: 1, // 50% de la pantalla
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Dashboard View',
                   style: CustomLabels.h1,
                 ),
                 const SizedBox(height: 10),
-                WhiteCard(
-                  title: user.nombre,
-                  child: Text(user.correo),
+                DarkCard(
+                  title: ' Usuario ',
+                  child: Text(
+                    user.correo,
+                    style: const TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const DarkCard(
+                  title: ' Quienes somos ',
+                  child: Text(
+                    'En Zapatos Únicos, nos dedicamos a ofrecer calzado de alta calidad que combina estilo, comodidad y durabilidad. Desde nuestros inicios, hemos trabajado para proporcionar a nuestros clientes una experiencia de compra excepcional, asegurando que cada par de zapatos sea el complemento perfecto para su estilo de vida. Nos enorgullecemos de ofrecer una amplia variedad de modelos que se adaptan a todas las edades y ocasiones, desde el día a día hasta eventos especiales.',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const DarkCard(
+                  title: 'Mision',
+                  child: Text(
+                    'Nuestra misión es ser la tienda de referencia en el mercado de calzado, ofreciendo productos de calidad superior que satisfagan las necesidades y expectativas de nuestros clientes. Nos comprometemos a mantener un estándar de excelencia en cada aspecto de nuestro negocio, desde la selección de materiales hasta la atención al cliente, con el fin de crear una experiencia de compra única y memorable.',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const DarkCard(
+                  title: 'Vision',
+                  child: Text(
+                    'Aspiramos a ser reconocidos como líderes en la industria del calzado, expandiendo nuestra presencia a nivel nacional e internacional. Nos esforzamos por innovar constantemente en diseño y tecnología para ofrecer productos que no solo sean estéticamente atractivos, sino también sostenibles y respetuosos con el medio ambiente. Nuestra visión es construir una marca que represente calidad, estilo y responsabilidad social.',
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -262,7 +289,7 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
               if (gridIndex < gridItems.length) {
                 // Determinar el borde según la fila
                 Border border = Border.all(
-                  color: (y == 2) ? Colors.green : Colors.transparent, // Rojo para la fila 3
+                  color: (y == 0) ? Colors.green : Colors.transparent, // Rojo para la fila 3
                   width: 3,
                 );
 
@@ -284,16 +311,16 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Z: ${zapato.nombre}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15),
+                        '${zapato.nombre}',
+                        style: const TextStyle(color: Colors.white, fontSize: 10),
                       ),
                       const SizedBox(height: 2),
-                      Text('T: ${talla.talla}',
+                      Text(
+                          'T: ${talla.talla} ... P: (${talla.posicion.first.px}, ${talla.posicion.first.py})',
                           style: const TextStyle(color: Colors.grey, fontSize: 10)),
-                      const SizedBox(height: 2),
-                      Text('P: (${talla.posicion.first.px}, ${talla.posicion.first.py})',
-                          style: const TextStyle(color: Colors.grey, fontSize: 10)),
+                      //const SizedBox(height: 2),
+                      // Text('P: (${talla.posicion.first.px}, ${talla.posicion.first.py})',
+                      //     style: const TextStyle(color: Colors.grey, fontSize: 10)),
                     ],
                   ),
                 );

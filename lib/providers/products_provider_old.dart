@@ -106,6 +106,50 @@ class ProductsProvider extends ChangeNotifier {
       return null;
     }
   }
+
+  Future<void> updatePosition(int n) async {
+    print("El valor de n es: ");
+    print(n);
+    print(".........");
+
+    final url = Uri.parse('http://localhost:8080/api/productos/update-positions/0');
+    
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: '{"n": $n}',
+      );
+
+      if (response.statusCode == 200) {
+        print('Posiciones actualizadas correctamente.');
+      } else {
+        print('Error en la actualización: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+
+
+    // final data = {
+    //   'n': n
+    // };
+    
+
+    // try {
+    //   await CafeApi.put('/productos/update-positions/3', data);
+
+    //   notifyListeners();
+    // } catch (e) {
+    //   print('Error al modificar');
+    //   print(e);
+    //   throw 'Error al modificar categoria';
+    // }
+  //}
 }
 
 

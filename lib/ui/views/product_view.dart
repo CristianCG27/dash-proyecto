@@ -358,7 +358,7 @@ class _ProductViewState extends State<ProductView> {
                                             padding: EdgeInsets.symmetric(horizontal: 70),
                                             child: Padding(
                                               padding: EdgeInsets.only(top: 12),
-                                              child: OrderBtn(label: "Ordenar cA", time: 5000),
+                                              child: OrderBtn(label: "Ordenar cA"),
                                               // CheckOutBtn(
                                               //     onTap: () async {
 

@@ -31,8 +31,6 @@ class Posicion {
   //   return '$px , $py';
   // }
 
-  
-
   // String toStringI(int index) {
 
   //   if(index == 0){

@@ -47,7 +47,7 @@ class HomeWidget extends StatelessWidget {
                     print(shoe);
                     return GestureDetector(
                       onTap: () {
-                        getStatus();
+                        //getStatus();
                         print("Aqui se hace tappp....");
                         productNofier.shoesSizes = shoe.tallas;
                         print(productNofier.shoeeSizes.toString());

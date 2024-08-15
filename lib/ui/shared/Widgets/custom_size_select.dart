@@ -22,16 +22,20 @@ class _CustomSizeSelectState extends State<CustomSizeSelect> {
         padding: const EdgeInsets.symmetric(horizontal: 2.0),
         child: GestureDetector(
           onTap: () {
-            
             var posiciond = widget.posicion[0].toJson();
             //var selected = widget.isSelected;
             int tiempoAct = 0;
             int posy = posiciond['py'];
             //print(posiciond['px']);
             print(posy);
-            tiempoAct = (posy - 1) * 2000;
-
-            Provider.of<DataProvider>(context, listen: false).updateData(tiempoAct);
+            if (posy == 1) {
+              tiempoAct = 0;
+              Provider.of<DataProvider>(context, listen: false).updateData(tiempoAct);
+            } else {
+              tiempoAct = (11 - posy) * 3270;
+              Provider.of<DataProvider>(context, listen: false).updateData(tiempoAct);
+            }
+              Provider.of<DataProvider>(context, listen: false).updatePos(posy);
 
             setState(() {
               widget.isSelected = !widget.isSelected; // Alternar el estado al hacer clic

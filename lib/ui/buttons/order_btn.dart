@@ -62,6 +62,7 @@
 //   }
 // }
 
+import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -70,13 +71,12 @@ import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
 import 'package:admin_dashboard/ui/shared/Widgets/charging_overlay.dart';
 
 class OrderBtn extends StatelessWidget {
-  const OrderBtn({Key? key, required this.label, required this.time}) : super(key: key);
+  const OrderBtn({Key? key, required this.label}) : super(key: key);
 
   final String label;
-  final int time;
 
   /// URL base del ESP8266
-  final String espUrl = 'http://192.168.137.129';
+  final String espUrl = 'http://192.168.137.198';
 
   /// Enciende el LED en el ESP8266 durante el tiempo especificado
   Future<void> turnOnLed(int timeInMillis) async {
@@ -112,7 +112,10 @@ class OrderBtn extends StatelessWidget {
       builder: (context, dataModel, child) {
         return GestureDetector(
           onTap: () {
-            turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
+            //turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
+            ProductsProvider productsProvider = ProductsProvider();
+            print(dataModel.pos);
+            productsProvider.updatePosition(dataModel.pos);
             var tiempo = dataModel.tiempo / 1000;
             _showCountdownOverlay(context, tiempo);
           },
