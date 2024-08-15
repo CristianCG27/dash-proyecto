@@ -1,6 +1,7 @@
 import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:admin_dashboard/ui/buttons/order_btn.dart';
+import 'package:admin_dashboard/ui/buttons/sell_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -353,29 +354,32 @@ class _ProductViewState extends State<ProductView> {
                                             maxLines: 4,
                                             style: appstyle(12, Colors.black, FontWeight.normal),
                                           ),
-                                          const SizedBox(height: 5),
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 70),
-                                            child: Padding(
-                                              padding: EdgeInsets.only(top: 12),
-                                              child: OrderBtn(label: "Ordenar cA"),
-                                              // CheckOutBtn(
-                                              //     onTap: () async {
+                                          const SizedBox(height: 30),
+                                          const Center(
+                                            child: Row(
+                                                //padding: EdgeInsets.only(top: 12),
+                                                children: [
+                                                  OrderBtn(label: "Ordenar Caja"),
+                                                  SizedBox(width: 10),
+                                                  SellBtn(label: 'Vender')
+                                                ]
+                                                // CheckOutBtn(
+                                                //     onTap: () async {
 
-                                              //       // _createCart({
-                                              //       //   "id": producto.id,
-                                              //       //   "name": producto.nombre,
-                                              //       //   "category": producto.categoria,
-                                              //       //   //"sizes": productNotifier.sizes,
-                                              //       //   "imageUrl": producto.img[0],
-                                              //       //   "price": producto.precio,
-                                              //       //   "qty": 1
-                                              //       // });
-                                              //       //productNotifier.sizes.clear();
-                                              //       Navigator.pop(context);
-                                              //     },
-                                              //     label: "Ordenar"),
-                                            ),
+                                                //       // _createCart({
+                                                //       //   "id": producto.id,
+                                                //       //   "name": producto.nombre,
+                                                //       //   "category": producto.categoria,
+                                                //       //   //"sizes": productNotifier.sizes,
+                                                //       //   "imageUrl": producto.img[0],
+                                                //       //   "price": producto.precio,
+                                                //       //   "qty": 1
+                                                //       // });
+                                                //       //productNotifier.sizes.clear();
+                                                //       Navigator.pop(context);
+                                                //     },
+                                                //     label: "Ordenar"),
+                                                ),
                                           ),
                                           const SizedBox(height: 50),
                                         ],

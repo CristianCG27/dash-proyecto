@@ -42,7 +42,7 @@ class SellBtn extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               height: 50,
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: (MediaQuery.of(context).size.width * 0.7) * 0.35,
               child: Center(
                 child: Text(
                   label,
