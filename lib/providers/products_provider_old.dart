@@ -22,23 +22,6 @@ class ProductsProvider extends ChangeNotifier {
     List<dynamic> data = jsonDecode(resp.body);
 
     return data.map((json) => Producto.fromJson(json)).toList();
-
-    // final productsList = productoFromJson(resp);
-    // print(object)
-
-    // isLoading = false;
-    // notifyListeners();
-    // return productsList.toList();
-    //final productsList = productoFromJson(resp);
-
-    // List<dynamic> data = jsonDecode(resp.body);
-    // isLoading = false;
-    // //notifyListeners();
-    // return data.map((item) => Producto.fromJson(item)).toList();
-
-    // // isLoading = false;
-    // // notifyListeners();
-    // // //return productsList.toList();
   }
 
   Future<List<Producto>> getMaleProducts() async {
@@ -107,13 +90,15 @@ class ProductsProvider extends ChangeNotifier {
     }
   }
 
+  /// Product View Buttons
+
   Future<void> updatePosition(int n) async {
     print("El valor de n es: ");
     print(n);
     print(".........");
 
     final url = Uri.parse('http://localhost:8080/api/productos/update-positions/0');
-    
+
     try {
       final response = await http.put(
         url,
@@ -133,6 +118,82 @@ class ProductsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> venderProducto(String productoId, String tallaId) async {
+    final url = Uri.parse('http://localhost:8080/api/productos/$productoId/vender/$tallaId');
+
+    final response = await http.put(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'productoId': productoId, 'tallaId': tallaId}),
+    );
+
+    if (response.statusCode == 200) {
+      print('Venta exitosa');
+    } else {
+      print('Error en la venta: ${response.body}');
+    }
+  }
+
+  Future<void> updateAnaquel(String productoId, String tallaId, bool inEstante) async {
+    print("El valor en provider: ");
+    print('$productoId ,   $tallaId,    $inEstante');
+    print(".........");
+
+    final url = Uri.parse('http://localhost:8080/api/productos/update-anaquel/5');
+    
+    try {
+
+      final body = jsonEncode({
+      'id': productoId,
+      'idTalla': tallaId,
+      'inEstante': inEstante,
+    });
+
+
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        print('Anaquel Actualizado');
+      } else {
+        print('Error en la actualización del anaquel: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+}
+
+
+
+
+
+
+// final productsList = productoFromJson(resp);
+    // print(object)
+
+    // isLoading = false;
+    // notifyListeners();
+    // return productsList.toList();
+    //final productsList = productoFromJson(resp);
+
+    // List<dynamic> data = jsonDecode(resp.body);
+    // isLoading = false;
+    // //notifyListeners();
+    // return data.map((item) => Producto.fromJson(item)).toList();
+
+    // // isLoading = false;
+    // // notifyListeners();
+    // // //return productsList.toList();
+
+
+
+
 
 
     // final data = {
@@ -150,9 +211,6 @@ class ProductsProvider extends ChangeNotifier {
     //   throw 'Error al modificar categoria';
     // }
   //}
-}
-
-
 
 // class ProductProvider extends ChangeNotifier {
 //   List<Producto> productos = [];

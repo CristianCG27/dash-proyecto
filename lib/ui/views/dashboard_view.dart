@@ -298,11 +298,16 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
                   margin: const EdgeInsets.all(3),
                   padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 13, 17, 22),
-                        Color.fromARGB(255, 29, 37, 49),
-                      ],
+                    gradient: LinearGradient(
+                      colors: talla.inEstante
+                          ? [
+                              const Color.fromARGB(255, 13, 17, 22),
+                              const Color.fromARGB(255, 29, 37, 49),
+                            ]
+                          : [
+                              const Color.fromARGB(255, 43, 83, 133),
+                              const Color.fromARGB(255, 53, 72, 100),
+                            ],
                     ),
                     borderRadius: BorderRadius.circular(12),
                     border: border,
@@ -311,7 +316,7 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '${zapato.nombre}',
+                        zapato.nombre,
                         style: const TextStyle(color: Colors.white, fontSize: 10),
                       ),
                       const SizedBox(height: 2),

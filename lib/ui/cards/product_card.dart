@@ -130,56 +130,56 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Colors",
-                          style: appstyle(18, Colors.grey, FontWeight.w500),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(500)),
-                          child: Container(
-                            color: Colors.black,
-                            child: const Text(
-                              ".....",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 3),
-                        ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(500)),
-                          child: Container(
-                            color: Colors.yellow,
-                            child: const Text(
-                              ".....",
-                              style: TextStyle(color: Colors.yellow),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 3),
-                        ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(500)),
-                          child: Container(
-                            color: Colors.red,
-                            child: const Text(
-                              ".....",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        )
-                        // ChoiceChip(
-                        //   label: const Text(""),
-                        //   selected: selected,
-                        //   visualDensity: VisualDensity.compact,
-                        //   selectedColor: Colors.black,
-                        // )
-                      ],
-                    )
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       "Colors",
+                    //       style: appstyle(18, Colors.grey, FontWeight.w500),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //     ClipRRect(
+                    //       borderRadius: const BorderRadius.all(Radius.circular(500)),
+                    //       child: Container(
+                    //         color: Colors.black,
+                    //         child: const Text(
+                    //           ".....",
+                    //           style: TextStyle(color: Colors.black),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 3),
+                    //     ClipRRect(
+                    //       borderRadius: const BorderRadius.all(Radius.circular(500)),
+                    //       child: Container(
+                    //         color: Colors.yellow,
+                    //         child: const Text(
+                    //           ".....",
+                    //           style: TextStyle(color: Colors.yellow),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(width: 3),
+                    //     ClipRRect(
+                    //       borderRadius: const BorderRadius.all(Radius.circular(500)),
+                    //       child: Container(
+                    //         color: Colors.red,
+                    //         child: const Text(
+                    //           ".....",
+                    //           style: TextStyle(color: Colors.red),
+                    //         ),
+                    //       ),
+                    //     )
+                    //     // ChoiceChip(
+                    //     //   label: const Text(""),
+                    //     //   selected: selected,
+                    //     //   visualDensity: VisualDensity.compact,
+                    //     //   selectedColor: Colors.black,
+                    //     // )
+                    //   ],
+                    // )
                   ],
                 ),
               )

@@ -2,6 +2,7 @@ import 'package:admin_dashboard/providers/products_provider_old.dart';
 import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:admin_dashboard/ui/buttons/order_btn.dart';
 import 'package:admin_dashboard/ui/buttons/sell_btn.dart';
+import 'package:admin_dashboard/ui/shared/Widgets/custom_retorn_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -317,14 +318,54 @@ class _ProductViewState extends State<ProductView> {
                                                   itemBuilder: (context, index) {
                                                     final sizes = productNotifier.shoeeSizes[index];
                                                     // print(productNotifier.shoeeSizes.length);
+                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print(sizes.talla.id);
+                                                    print('+++++++++++++++++++++++++++++');
                                                     // print('++++++++++++++++++++++++++');
                                                     return CustomSizeSelect(
-                                                        //tallas: sizes,
-                                                        // indx: index,
-                                                        // tamano: productNotifier.shoeeSizes.length,
-                                                        talla: sizes.talla,
-                                                        posicion: sizes.posicion,
-                                                        isSelected: sizes.isSelected);
+                                                      //tallas: sizes,
+                                                      // indx: index,
+                                                      // tamano: productNotifier.shoeeSizes.length,
+                                                      talla: sizes.talla,
+                                                      posicion: sizes.posicion,
+                                                      isSelected: sizes.isSelected,
+                                                      productId: producto.id,
+                                                      tallaId: sizes.id,
+                                                      existencia: sizes.existencia,
+                                                      estante: sizes.inEstante,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10),
+                                              SizedBox(
+                                                height: 30,
+                                                //width: MediaQuery.of(context).size.width * 0.5,
+                                                child: ListView.builder(
+                                                  itemCount: productNotifier.shoeeSizes.length,
+                                                  scrollDirection: Axis.horizontal,
+                                                  padding: EdgeInsets.zero,
+
+                                                  ///
+                                                  itemBuilder: (context, index) {
+                                                    final sizes = productNotifier.shoeeSizes[index];
+                                                    // print(productNotifier.shoeeSizes.length);
+                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print(sizes.talla.id);
+                                                    print('+++++++++++++++++++++++++++++');
+                                                    // print('++++++++++++++++++++++++++');
+                                                    return CustomRetornSelect(
+                                                      //tallas: sizes,
+                                                      // indx: index,
+                                                      // tamano: productNotifier.shoeeSizes.length,
+                                                      talla: sizes.talla,
+                                                      posicion: sizes.posicion,
+                                                      isSelected: sizes.isSelected,
+                                                      productId: producto.id,
+                                                      tallaId: sizes.id,
+                                                      existencia: sizes.existencia,
+                                                      estante: sizes.inEstante,
+                                                    );
                                                   },
                                                 ),
                                               ),

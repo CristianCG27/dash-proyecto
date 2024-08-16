@@ -144,5 +144,78 @@
   //       }
   //     },
   //   );
+
+  import 'package:flutter/material.dart';
+
+class VentaScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Ventana de ventas'),
+      ),
+      body: Center(
+        child: GestureDetector(
+          onTap: () async {
+            // Muestra el diálogo de "Venta exitosa"
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Venta exitosa'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                      Text('Procesando la venta...'),
+                    ],
+                  ),
+                );
+              },
+            );
+
+            // Espera 3 segundos antes de redirigir
+            await Future.delayed(Duration(seconds: 3));
+
+            // Cierra el diálogo
+            Navigator.of(context).pop();
+
+            // Redirige a otra pantalla
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => PantallaSiguiente(),
+              ),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            color: Colors.blue,
+            child: Text(
+              'Realizar Venta',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PantallaSiguiente extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pantalla siguiente'),
+      ),
+      body: Center(
+        child: Text('¡Redirigido a la siguiente pantalla!'),
+      ),
+    );
+  }
+}
+
   // }
 

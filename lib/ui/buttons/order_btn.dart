@@ -69,32 +69,12 @@ import 'package:provider/provider.dart';
 import 'package:admin_dashboard/providers/data_provider.dart';
 import 'package:admin_dashboard/ui/shared/style/appstyle.dart';
 import 'package:admin_dashboard/ui/shared/Widgets/charging_overlay.dart';
+import 'package:admin_dashboard/providers/esp82_provider.dart';
 
 class OrderBtn extends StatelessWidget {
   const OrderBtn({Key? key, required this.label}) : super(key: key);
 
   final String label;
-
-  /// URL base del ESP8266
-  final String espUrl = 'http://192.168.137.198';
-
-  /// Enciende el LED en el ESP8266 durante el tiempo especificado
-  Future<void> turnOnLed(int timeInMillis) async {
-    final url = '$espUrl/on?time=$timeInMillis'; // Construir la URL completa
-
-    try {
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        print('LED encendido con éxito');
-        print('Respuesta del servidor: ${response.body}');
-      } else {
-        print('Error en la solicitud: Código ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error de conexión: $e');
-    }
-  }
 
   void _showCountdownOverlay(BuildContext context, double tiempo) {
     showDialog(
@@ -118,6 +98,7 @@ class OrderBtn extends StatelessWidget {
             productsProvider.updatePosition(dataModel.pos);
             var tiempo = dataModel.tiempo / 1000;
             _showCountdownOverlay(context, tiempo);
+            productsProvider.updateAnaquel(dataModel.productoId, dataModel.tallaId, false);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
