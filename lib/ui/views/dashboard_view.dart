@@ -145,6 +145,7 @@
 // }
 
 import 'package:admin_dashboard/models/producto.dart';
+import 'package:admin_dashboard/ui/buttons/sincro_btn.dart';
 import 'package:admin_dashboard/ui/cards/dark_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -207,7 +208,7 @@ class DashboardView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const SizedBox(height: 10),
+                const SincroBtn(label: 'Sincronizar'),
               ],
             ),
           ),

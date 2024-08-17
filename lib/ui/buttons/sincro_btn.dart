@@ -27,30 +27,9 @@ class SincroBtn extends StatelessWidget {
       builder: (context, dataModel, child) {
         return GestureDetector(
           onTap: () {
-            //turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
             ProductsProvider productsProvider = ProductsProvider();
-            var posiciond = widget.posicion[0].toJson();
-                    int tiempoAct = 0;
-                    int posy = posiciond['py'];
-                    int pos;
-            if (posy == 1) {
-                      tiempoAct = 0;
-                      //turnOnLed(tiempoAct);
-                      var tiempo = tiempoAct / 1000;
-                      _showCountdownOverlay(context, tiempo);
-                    } else {
-                      //tiempoAct = (11 - posy) * 3270;
-                      tiempoAct = (11 - posy) * 1000;
-                      //turnOnLed(tiempoAct);
-                      var tiempo = tiempoAct / 1000;
-                      _showCountdownOverlay(context, tiempo);
-                    }
-
-
-            pos = (11 - posy);
-
-            
-            productsProvider.updatePosition(pos);
+            productsProvider.sincronizarBD();
+            //turnOnLed(30000); // Utilizar el tiempo de DataProvider
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),

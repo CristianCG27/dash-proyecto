@@ -140,15 +140,13 @@ class ProductsProvider extends ChangeNotifier {
     print(".........");
 
     final url = Uri.parse('http://localhost:8080/api/productos/update-anaquel/5');
-    
+
     try {
-
       final body = jsonEncode({
-      'id': productoId,
-      'idTalla': tallaId,
-      'inEstante': inEstante,
-    });
-
+        'id': productoId,
+        'idTalla': tallaId,
+        'inEstante': inEstante,
+      });
 
       final response = await http.put(
         url,
@@ -162,6 +160,22 @@ class ProductsProvider extends ChangeNotifier {
         print('Anaquel Actualizado');
       } else {
         print('Error en la actualización del anaquel: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> sincronizarBD() async {
+    final url = Uri.parse('http://localhost:8080/api/productos/66be7e6b3049afa616f79496/sincronizar/66be7e6b3049afa616f79497');
+
+    try {
+      final response = await http.put(url);
+
+      if (response.statusCode == 200) {
+        print('Posiciones actualizadas correctamente.');
+      } else {
+        print('Error en la actualización: ${response.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
