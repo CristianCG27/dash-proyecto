@@ -318,9 +318,9 @@ class _ProductViewState extends State<ProductView> {
                                                   itemBuilder: (context, index) {
                                                     final sizes = productNotifier.shoeeSizes[index];
                                                     // print(productNotifier.shoeeSizes.length);
-                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print('+++++++++++++++++++++++++++++');
                                                     //print(sizes.talla.id);
-                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print('+++++++++++++++++++++++++++++');
                                                     // print('++++++++++++++++++++++++++');
                                                     return CustomSizeSelect(
                                                       //tallas: sizes,
@@ -350,9 +350,9 @@ class _ProductViewState extends State<ProductView> {
                                                   itemBuilder: (context, index) {
                                                     final sizes = productNotifier.shoeeSizes[index];
                                                     // print(productNotifier.shoeeSizes.length);
-                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print('+++++++++++++++++++++++++++++');
                                                     //print(sizes.talla.id);
-                                                    print('+++++++++++++++++++++++++++++');
+                                                    //print('+++++++++++++++++++++++++++++');
                                                     // print('++++++++++++++++++++++++++');
                                                     return CustomRetornSelect(
                                                       //tallas: sizes,

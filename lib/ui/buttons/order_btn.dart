@@ -92,13 +92,14 @@ class OrderBtn extends StatelessWidget {
       builder: (context, dataModel, child) {
         return GestureDetector(
           onTap: () {
-            //turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
+            turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
             ProductsProvider productsProvider = ProductsProvider();
-            print(dataModel.pos);
+            //print(dataModel.pos);
             productsProvider.updatePosition(dataModel.pos);
             var tiempo = dataModel.tiempo / 1000;
             _showCountdownOverlay(context, tiempo);
             productsProvider.updateAnaquel(dataModel.productoId, dataModel.tallaId, false);
+            turnOnPx(dataModel.posx);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),

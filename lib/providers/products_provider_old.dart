@@ -135,9 +135,9 @@ class ProductsProvider extends ChangeNotifier {
   }
 
   Future<void> updateAnaquel(String productoId, String tallaId, bool inEstante) async {
-    print("El valor en provider: ");
-    print('$productoId ,   $tallaId,    $inEstante');
-    print(".........");
+    //print("El valor en provider: ");
+    //print('$productoId ,   $tallaId,    $inEstante');
+    //print(".........");
 
     final url = Uri.parse('http://localhost:8080/api/productos/update-anaquel/5');
 

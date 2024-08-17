@@ -53,16 +53,19 @@ class _CustomRetornSelectState extends State<CustomRetornSelect> {
                     int tiempoAct = 0;
                     int posy = posiciond['py'];
                     int pos;
+                    int posx = posiciond['px'];
 
                     if (posy == 1) {
                       tiempoAct = 0;
-                      //turnOnLed(tiempoAct);
+                      turnOnLed(tiempoAct);
+                      turnOnPx(posx);
                       var tiempo = tiempoAct / 1000;
                       _showCountdownOverlay(context, tiempo);
                     } else {
                       //tiempoAct = (11 - posy) * 3270;
                       tiempoAct = (11 - posy) * 1000;
-                      //turnOnLed(tiempoAct);
+                      turnOnLed(tiempoAct);
+                      turnOnPx(posx);
                       var tiempo = tiempoAct / 1000;
                       _showCountdownOverlay(context, tiempo);
                     }

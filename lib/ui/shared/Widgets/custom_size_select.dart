@@ -36,14 +36,17 @@ class _CustomSizeSelectState extends State<CustomSizeSelect> {
               ? () {
                   // print("El valor Id de la talla es: ");
                   // print(widget.productId);
-                  print("---------------");
-                  print(widget.existencia);
+                  //print("---------------");
+                  //print(widget.existencia);
 
                   var posiciond = widget.posicion[0].toJson();
                   int tiempoAct = 0;
                   int posy = posiciond['py'];
-                  print('posicion select');
-                  print(posy);
+                  int posx = posiciond['px'];
+                  //print('posicion select');
+                  //print(posy);
+                  print('posicion x');
+                  print(posx);
 
                   if (posy == 1) {
                     tiempoAct = 0;
@@ -55,13 +58,15 @@ class _CustomSizeSelectState extends State<CustomSizeSelect> {
                   }
 
                   Provider.of<DataProvider>(context, listen: false).updatePos(posy);
+                  Provider.of<DataProvider>(context, listen: false).positionx(posx);
+                  
                   Provider.of<DataProvider>(context, listen: false).sendPId(widget.productId);
                   Provider.of<DataProvider>(context, listen: false).sendTId(widget.tallaId);
 
                   setState(() {
                     widget.isSelected = !widget.isSelected; // Alternar el estado al hacer clic
                   });
-                  print(widget.isSelected);
+                  //print(widget.isSelected);
                 }
               : null,
           child: Container(
