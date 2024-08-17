@@ -206,6 +206,8 @@ class DashboardView extends StatelessWidget {
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -215,9 +217,9 @@ class DashboardView extends StatelessWidget {
           // Columna derecha: Grid
           Expanded(
             flex: 1, // 50% de la pantalla
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height, // Ocupa toda la altura disponible
-              child: AspectRatio(
+              child: const AspectRatio(
                 aspectRatio: 2, // Relación de aspecto ajustada
                 child: MyGrid(),
               ),
@@ -230,6 +232,8 @@ class DashboardView extends StatelessWidget {
 }
 
 class MyGrid extends StatefulWidget {
+  const MyGrid({super.key});
+
   @override
   State<MyGrid> createState() => _MyGridState();
 }
@@ -246,7 +250,6 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getProducts();
   }
@@ -260,7 +263,7 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
       future: _productos,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
@@ -276,7 +279,7 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
 
           // Crear un grid vacío y llenarlo con los elementos en sus posiciones
           List<Widget> gridItems =
-              List.generate(gridWidth * gridHeight, (index) => SizedBox.shrink());
+              List.generate(gridWidth * gridHeight, (index) => const SizedBox.shrink());
 
           for (var zapato in zapatos) {
             for (var talla in zapato.tallas) {
@@ -299,14 +302,19 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
                   padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: talla.inEstante
-                          ? [
-                              const Color.fromARGB(255, 13, 17, 22),
-                              const Color.fromARGB(255, 29, 37, 49),
-                            ]
+                      colors: talla.existencia
+                          ? talla.inEstante
+                              ? [
+                                  const Color.fromARGB(255, 13, 17, 22),
+                                  const Color.fromARGB(255, 29, 37, 49),
+                                ]
+                              : [
+                                  const Color.fromARGB(255, 43, 83, 133),
+                                  const Color.fromARGB(255, 53, 72, 100),
+                                ]
                           : [
-                              const Color.fromARGB(255, 43, 83, 133),
-                              const Color.fromARGB(255, 53, 72, 100),
+                              const Color.fromARGB(255, 238, 234, 232),
+                              const Color.fromARGB(255, 168, 203, 255),
                             ],
                     ),
                     borderRadius: BorderRadius.circular(12),
@@ -330,7 +338,7 @@ class _MyGridState extends State<MyGrid> with TickerProviderStateMixin {
                   ),
                 );
               } else {
-                print('Error: gridIndex $gridIndex fuera del rango');
+                //print('Error: gridIndex $gridIndex fuera del rango');
               }
             }
           }

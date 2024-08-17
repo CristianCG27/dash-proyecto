@@ -11,14 +11,12 @@ import 'package:provider/provider.dart';
 class CustomRetornSelect extends StatefulWidget {
   CustomRetornSelect(
       {super.key,
-      required this.talla,
       required this.posicion,
       required this.isSelected,
       required this.productId,
       required this.tallaId,
       required this.existencia,
       required this.estante});
-  final String talla;
   final List<Posicion> posicion;
   final String productId;
   final String tallaId;
@@ -45,17 +43,16 @@ class _CustomRetornSelectState extends State<CustomRetornSelect> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2.0),
-      child: Consumer<DataProvider>(
-        builder: (context, dataModel, child) {
-          return GestureDetector(
-            onTap: widget.existencia
-                ? () {
+      child: GestureDetector(
+        onTap: widget.existencia
+            ? widget.estante
+                ? null
+                : () {
                     ProductsProvider productsProvider = ProductsProvider();
                     var posiciond = widget.posicion[0].toJson();
                     int tiempoAct = 0;
                     int posy = posiciond['py'];
                     int pos;
-
 
                     if (posy == 1) {
                       tiempoAct = 0;
@@ -74,28 +71,39 @@ class _CustomRetornSelectState extends State<CustomRetornSelect> {
                     productsProvider.updatePosition(pos);
                     productsProvider.updateAnaquel(widget.productId, widget.tallaId, true);
 
-                    Provider.of<DataProvider>(context, listen: false).updatePos(pos);
+                    //Provider.of<DataProvider>(context, listen: false).updatePos(pos);
                   }
-                : null,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12.0),
-              padding: const EdgeInsets.symmetric(horizontal: 31.0, vertical: 3.0),
-              decoration: BoxDecoration(
-                color: widget.estante ? Colors.grey : const Color.fromARGB(255, 0, 255, 8),
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                    color: widget.estante ? Colors.white : const Color.fromARGB(255, 0, 49, 2)),
-              ),
-              child: Text(
-                widget.talla,
-                style: TextStyle(
-                  color: widget.estante ? Colors.white : const Color.fromARGB(255, 21, 71, 28),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            : null,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 3.0),
+          decoration: BoxDecoration(
+            color: widget.existencia
+                ? widget.estante
+                    ? const Color.fromARGB(255, 255, 248, 248)
+                    : const Color.fromARGB(255, 0, 255, 8)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(
+                color: widget.existencia
+                    ? widget.estante
+                        ? Colors.white
+                        : const Color.fromARGB(255, 0, 49, 2)
+                    : Colors.white),
+          ),
+          child: Text(
+            "Regresar",
+            style: TextStyle(
+              fontSize: 10,
+              color: widget.existencia
+                  ? widget.estante
+                      ? Colors.white
+                      : const Color.fromARGB(255, 21, 71, 28)
+                  : Colors.white,
+              fontWeight: FontWeight.bold,
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -358,7 +358,7 @@ class _ProductViewState extends State<ProductView> {
                                                       //tallas: sizes,
                                                       // indx: index,
                                                       // tamano: productNotifier.shoeeSizes.length,
-                                                      talla: sizes.talla,
+                                                      //talla: sizes.talla,
                                                       posicion: sizes.posicion,
                                                       isSelected: sizes.isSelected,
                                                       productId: producto.id,
