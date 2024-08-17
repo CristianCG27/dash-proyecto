@@ -31,15 +31,10 @@ class SellBtn extends StatelessWidget {
       builder: (context, dataModel, child) {
         return GestureDetector(
           onTap: () async {
-            //turnOnLed(dataModel.tiempo); // Utilizar el tiempo de DataProvider
-
             ProductsProvider productsProvider = ProductsProvider();
             print(dataModel.productoId);
             print(dataModel.tallaId);
             productsProvider.venderProducto(dataModel.productoId, dataModel.tallaId);
-
-            //var tiempo = dataModel.tiempo / 1000;
-            //_showCountdownOverlay(context, tiempo);
 
             showDialog(
               context: context,

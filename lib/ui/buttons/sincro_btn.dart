@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/providers/products_provider_old.dart';
+import 'package:admin_dashboard/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:admin_dashboard/providers/data_provider.dart';
@@ -26,10 +27,12 @@ class SincroBtn extends StatelessWidget {
     return Consumer<DataProvider>(
       builder: (context, dataModel, child) {
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
             ProductsProvider productsProvider = ProductsProvider();
             productsProvider.sincronizarBD();
-            //turnOnLed(30000); // Utilizar el tiempo de DataProvider
+            turnOnLed(30000); // Utilizar el tiempo de DataProvider
+            await Future.delayed(const Duration(seconds: 3));
+            NavigationService.replaceTo('/dashboard');
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
